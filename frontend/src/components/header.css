@@ -1,0 +1,21 @@
+header {
+	padding: 1em 1em 0 1em;
+	background-color: #cbfffe;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+header a {
+	text-decoration: none;
+	color: black;
+}   
+.navBar {
+	border-top: 1px solid black;
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;
+	padding:1em;
+}
+.navBar a {
+    margin-left: 1em;
+	color:rgb(16, 16, 107);
+}

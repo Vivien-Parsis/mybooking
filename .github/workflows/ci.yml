@@ -1,0 +1,50 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+
+  backend:
+    name: Backend Tests (Node 22)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies on backend
+        run: |
+          cd backend
+          npm install
+
+      - name: Run backend tests
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DB_URL: ${{ secrets.DB_URL }}
+        run: |
+          cd backend
+          npm run test
+
+  frontend:
+    name: Frontend Build (Node 22)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies on frontend
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
