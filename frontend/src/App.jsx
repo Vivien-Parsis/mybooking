@@ -6,6 +6,7 @@ import Register from "./pages/register";
 import Header from "./components/header";
 import Room from "./pages/room";
 import PersonReservation from "./pages/personReservation";
+import Error404 from "./pages/error404";
 
 function App() {
 	return (
@@ -42,6 +43,14 @@ function App() {
 						<ProtectedRoute>
 							<PersonReservation />
 						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="*"
+					element={
+						<>
+							<Error404 />
+						</>
 					}
 				/>
 			</Routes>

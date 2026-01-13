@@ -20,10 +20,19 @@ describe("Auth Service Unit Tests", () => {
             expect(decoded).toHaveProperty("exp")
         })
 
-        it("should handle empty fields gracefully (if allowed by logic)", () => {
+        it("should handle empty fields by return null", () => {
             const user = {
                 id: "67890",
                 email: ""
+            }
+
+            const token = generateToken(user)
+            expect(token).toBeNull()
+        })
+        it("should handle wrong fields by return null", () => {
+            const user = {
+                test: "67890",
+                password: "lorem"
             }
 
             const token = generateToken(user)

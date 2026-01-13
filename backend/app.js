@@ -17,7 +17,7 @@ app.use('/room', roomRouter)
 
 app.use((req, res, next) => {
     return res.status(req.path === "/" ? 200 : 404)
-        .send({ "message": `${req.path === "/" ? "myContact api" : "page not found"}` })
+        .send({ "message": `${req.path === "/" ? "myBooking api" : "page not found"}` })
 })
 
 export { app }

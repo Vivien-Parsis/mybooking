@@ -28,18 +28,15 @@ describe("Reservation Integration Tests", () => {
     }
 
     beforeAll(async () => {
-        // Create User
         await personModel.deleteMany({ email: testPerson.email })
         const person = await personModel.create(testPerson)
         personId = person._id
         token = generateToken({ email: testPerson.email, id: personId })
 
-        // Create Other User (for auth tests)
         const otherPerson = await personModel.create({ ...testPerson, email: "other@test.com" })
         otherPersonId = otherPerson._id
         otherToken = generateToken({ email: "other@test.com", id: otherPersonId })
 
-        // Create Room
         await roomModel.deleteMany({ name: testRoom.name })
         const room = await roomModel.create(testRoom)
         roomId = room._id

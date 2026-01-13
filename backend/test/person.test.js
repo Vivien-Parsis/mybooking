@@ -6,7 +6,7 @@ import { personModel } from "../model/person.model.js"
 describe("Person Authentication Integration Tests", () => {
     beforeAll(async () => {
         await personModel.deleteMany({ email: "test@test.com" })
-    })  
+    })
 
     afterAll(async () => {
         await personModel.deleteMany({ email: "test@test.com" })
@@ -38,6 +38,18 @@ describe("Person Authentication Integration Tests", () => {
             expect(res.body.message).toMatch(/password must be/)
         })
 
+        it("should return 422 if email format is invalid", async () => {
+            const res = await request(app).post("/person/register").send({
+                email: "invalid-email-format",
+                password: "password123",
+                confirmPassword: "password123",
+                lastName: "Doe",
+                firstName: "John"
+            })
+            expect(res.statusCode).toBe(422)
+            expect(res.body.message).toBe("email not valid")
+        })
+        
         it("should return 200 and a token on successful registration", async () => {
             const res = await request(app).post("/person/register").send({
                 email: "test@test.com",
