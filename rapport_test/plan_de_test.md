@@ -113,3 +113,5 @@ Ce module vérifie la sécurité de l'interface utilisateur et la protection con
 | **F-SEC-05** | **Protection XSS (Email)** | `<script>alert('XSS')</script>` dans l'email | Le script n'est pas exécuté (pas d'alerte). |
 | **F-SEC-06** | **Protection XSS (Register)** | `<img src=x onerror=alert('XSS')>` dans les champs nom/prénom | Le script n'est pas exécuté (pas d'alerte). |
 | **F-SEC-07** | **Erreur 404** | Accès à une route inexistante | Affiche le composant `Error 404 - page not found`. |
+| **F-SEC-08** | **Validation MDP non identiques** | Mot de passe et confirmation différents | Message "mot de passes non identiques". |
+| **F-SEC-09** | **Validation Format MDP** | Mot de passe trop court ou non conforme | Message "mot de passes non conforme". |
