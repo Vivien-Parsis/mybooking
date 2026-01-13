@@ -1,4 +1,5 @@
-# Plan de Test Backend
+
+# Plan de Test
 
 ## Tests d'Intégration
 
@@ -96,3 +97,19 @@ Ce module gère la validation des données (ex: format de mot de passe).
 | **V-EMAIL-05** | **Email sans @** | Email sans arobase (ex: "testtest.com") | Retourne `false`. |
 | **V-EMAIL-06** | **Email sans extension** | Email sans extension de domaine (ex: "test@test") | Retourne `false`. |
 | **V-EMAIL-07** | **Email avec espaces** | Email contenant des espaces (ex: "test @test.com") | Retourne `false`. |
+
+## Tests Frontend (Cypress)
+
+### Sécurité et Authentification
+
+Ce module vérifie la sécurité de l'interface utilisateur et la protection contre les vulnérabilités courantes.
+
+| ID | Cas de Test | Données d'entrée | Résultat Attendu |
+| :--- | :--- | :--- | :--- |
+| **F-SEC-01** | **Redirection (Home)** | Accès à `/` sans token | Redirige vers `/login`. |
+| **F-SEC-02** | **Redirection (Reservation)** | Accès à `/person/reservation` sans token | Redirige vers `/login`. |
+| **F-SEC-03** | **Masquage MDP (Login)** | Champ mot de passe | L'attribut `type` est `password`. |
+| **F-SEC-04** | **Masquage MDP (Register)** | Champs mot de passe et confirmation | Les attributs `type` sont `password`. |
+| **F-SEC-05** | **Protection XSS (Email)** | `<script>alert('XSS')</script>` dans l'email | Le script n'est pas exécuté (pas d'alerte). |
+| **F-SEC-06** | **Protection XSS (Register)** | `<img src=x onerror=alert('XSS')>` dans les champs nom/prénom | Le script n'est pas exécuté (pas d'alerte). |
+| **F-SEC-07** | **Erreur 404** | Accès à une route inexistante | Affiche le composant `Error 404 - page not found`. |

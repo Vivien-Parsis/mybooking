@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Vite
+dist/
+dist-ssr/
+*.local
