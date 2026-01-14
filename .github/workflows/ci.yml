@@ -55,3 +55,53 @@ jobs:
                   start: npm run dev
                   wait-on: "http://localhost:5173"
                   browser: chrome
+
+    performance:
+        name: Performance Tests (Node 22)
+        runs-on: ubuntu-latest
+        needs: [backend, frontend]
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install backend dependencies
+              run: |
+                  cd backend
+                  npm install
+
+            - name: Install frontend dependencies
+              run: |
+                  cd frontend
+                  npm install
+
+            - name: Install performance test dependencies
+              run: |
+                  cd performance_test
+                  npm install
+
+            - name: Start backend server
+              env:
+                  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+                  DB_URL: ${{ secrets.DB_URL }}
+              run: |
+                  cd backend
+                  npm start &
+                  sleep 5
+
+            - name: Start frontend server
+              run: |
+                  cd frontend
+                  npm run dev &
+                  sleep 10
+
+            - name: Run performance tests
+              env:
+                  API_URL: http://localhost:3000/api/v1
+                  FRONT_URL: http://localhost:5173
+              run: |
+                  cd performance_test
+                  npm run test

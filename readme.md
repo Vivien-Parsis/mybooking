@@ -12,7 +12,7 @@ Application web avec serveur frontend React et serveur backend en node et expres
 ## Configuration requise
 
 - git
-- node (>=22) et npm, ou Docker
+- node (>=22) et npm
 - Base de données mongodb externe
 
 ## Instruction d'installation
