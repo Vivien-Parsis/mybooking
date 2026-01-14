@@ -1,4 +1,4 @@
-# MyBooking
+# EasyBooking
 
 Application web avec serveur frontend React et serveur backend en node et express
 
@@ -22,8 +22,8 @@ Application web avec serveur frontend React et serveur backend en node et expres
 - cloner le dépot :
 
 ```bash
-   git clone https://github.com/Vivien-Parsis/myBooking
-   cd myBooking
+   git clone https://github.com/Vivien-Parsis/EasyBooking
+   cd EasyBooking
 ```
 
 - creer un fichier .env dans le backend :

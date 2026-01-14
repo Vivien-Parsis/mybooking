@@ -90,13 +90,13 @@ Ce module gère la validation des données (ex: format de mot de passe).
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu |
 | :--- | :--- | :--- | :--- |
-| **V-EMAIL-01** | **Email valide** | Email au format valide (ex: `test@test.com`) | Retourne `true`. |
-| **V-EMAIL-02** | **Entrée Nulle/Indéfinie** | `null` ou `undefined` | Retourne `false`. |
-| **V-EMAIL-03** | **Chaîne vide** | "" | Retourne `false`. |
-| **V-EMAIL-04** | **Type invalide** | Nombre, Objet, etc. | Retourne `false`. |
-| **V-EMAIL-05** | **Email sans @** | Email sans arobase (ex: "testtest.com") | Retourne `false`. |
-| **V-EMAIL-06** | **Email sans extension** | Email sans extension de domaine (ex: "test@test") | Retourne `false`. |
-| **V-EMAIL-07** | **Email avec espaces** | Email contenant des espaces (ex: "test @test.com") | Retourne `false`. |
+| **V-EML-01** | **Email valide** | Email au format valide (ex: `test@test.com`) | Retourne `true`. |
+| **V-EML-02** | **Entrée Nulle/Indéfinie** | `null` ou `undefined` | Retourne `false`. |
+| **V-EML-03** | **Chaîne vide** | "" | Retourne `false`. |
+| **V-EML-04** | **Type invalide** | Nombre, Objet, etc. | Retourne `false`. |
+| **V-EML-05** | **Email sans @** | Email sans arobase (ex: "testtest.com") | Retourne `false`. |
+| **V-EML-06** | **Email sans extension** | Email sans extension de domaine (ex: "test@test") | Retourne `false`. |
+| **V-EML-07** | **Email avec espaces** | Email contenant des espaces (ex: "test @test.com") | Retourne `false`. |
 
 ## Tests Frontend (Cypress)
 
@@ -115,3 +115,29 @@ Ce module vérifie la sécurité de l'interface utilisateur et la protection con
 | **F-SEC-07** | **Erreur 404** | Accès à une route inexistante | Affiche le composant `Error 404 - page not found`. |
 | **F-SEC-08** | **Validation MDP non identiques** | Mot de passe et confirmation différents | Message "mot de passes non identiques". |
 | **F-SEC-09** | **Validation Format MDP** | Mot de passe trop court ou non conforme | Message "mot de passes non conforme". |
+
+## Tests de Performance
+
+Ces tests mesurent les performances de l'application sous charge à l'aide d'**autocannon**. Chaque test utilise **10 connexions simultanées** et un **pipelining de 1**.
+
+### Backend API
+
+Ce module teste les performances des endpoints de l'API backend.
+
+| ID | Cas de Test | Endpoint | Durée | Configuration | Résultat Attendu |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **PERF-BE-01** | **Health Check** | `GET /health` | 10s | 10 connexions | Mesure du débit et de la latence du endpoint de santé. |
+| **PERF-BE-02** | **Liste des Salles** | `GET /room` | 2s | 10 connexions | Mesure des performances de récupération de la liste des salles. |
+| **PERF-BE-03** | **Erreur 404** | `GET /nonexistent-endpoint` | 10s | 10 connexions | Mesure des performances de gestion des erreurs 404. |
+| **PERF-BE-04** | **Liste Réservations (Authentifié)** | `GET /reservation/person` | 2s | 10 connexions + Token JWT | Mesure des performances de récupération des réservations utilisateur. |
+
+### Frontend
+
+Ce module teste les performances des pages frontend.
+
+| ID | Cas de Test | Page | Durée | Configuration | Résultat Attendu |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **PERF-FE-01** | **Page Login** | `/login` | 10s | 10 connexions | Mesure du temps de chargement de la page de connexion. |
+| **PERF-FE-02** | **Page Accueil (Authentifié)** | `/` | 2s | 10 connexions + Token JWT | Mesure du temps de chargement de la page d'accueil pour utilisateur connecté. |
+| **PERF-FE-03** | **Page Réservations (Authentifié)** | `/person/reservation` | 2s | 10 connexions + Token JWT | Mesure du temps de chargement de la page des réservations. |
+| **PERF-FE-04** | **Erreur 404** | `/nonexistent-page` | 10s | 10 connexions | Mesure des performances de la page d'erreur 404. |
