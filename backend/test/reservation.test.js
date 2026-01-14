@@ -49,10 +49,10 @@ describe("Reservation Integration Tests", () => {
         await databaseConnection.close()
     })
 
-    describe("POST /reservation/person/add", () => {
+    describe("POST /api/v1/reservation/person/add", () => {
         it("should return 400 if parameters are missing", async () => {
             const res = await request(app)
-                .post("/reservation/person/add")
+                .post("/api/v1/reservation/person/add")
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     room: roomId
@@ -63,7 +63,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should return 200 and create reservation", async () => {
             const res = await request(app)
-                .post("/reservation/person/add")
+                .post("/api/v1/reservation/person/add")
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     room: roomId,
@@ -78,7 +78,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should return 400 if room already reserved", async () => {
             const res = await request(app)
-                .post("/reservation/person/add")
+                .post("/api/v1/reservation/person/add")
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     room: roomId,
@@ -89,12 +89,12 @@ describe("Reservation Integration Tests", () => {
         })
     })
     
-    describe("POST /reservation/person/add (Strict)", () => {
+    describe("POST /api/v1/reservation/person/add (Strict)", () => {
         const fixedDate = new Date("2026-01-20").toISOString()
 
         it("should create reservation", async () => {
              const res = await request(app)
-                .post("/reservation/person/add")
+                .post("/api/v1/reservation/person/add")
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     room: roomId,
@@ -107,7 +107,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should fail if already reserved", async () => {
             const res = await request(app)
-                .post("/reservation/person/add")
+                .post("/api/v1/reservation/person/add")
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     room: roomId,
@@ -120,10 +120,10 @@ describe("Reservation Integration Tests", () => {
         })
     })
 
-    describe("GET /reservation/person", () => {
+    describe("GET /api/v1/reservation/person", () => {
         it("should return user reservations", async () => {
             const res = await request(app)
-                .get("/reservation/person")
+                .get("/api/v1/reservation/person")
                 .set("Authorization", `Bearer ${token}`)
             
             expect(res.statusCode).toBe(200)
@@ -133,7 +133,7 @@ describe("Reservation Integration Tests", () => {
         })
     })
 
-    describe("DELETE /reservation/person", () => {
+    describe("DELETE /api/v1/reservation/person", () => {
         let reservId
 
         beforeEach(async () => {
@@ -149,7 +149,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should return 400 if id missing", async () => {
              const res = await request(app)
-                .delete("/reservation/person")
+                .delete("/api/v1/reservation/person")
                 .set("Authorization", `Bearer ${token}`)
                 .send({})
             expect(res.statusCode).toBe(400)
@@ -157,7 +157,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should return 401 if trying to delete other's reservation", async () => {
             const res = await request(app)
-                .delete("/reservation/person")
+                .delete("/api/v1/reservation/person")
                 .set("Authorization", `Bearer ${otherToken}`)
                 .send({ id: reservId })
             expect(res.statusCode).toBe(401)
@@ -165,7 +165,7 @@ describe("Reservation Integration Tests", () => {
 
         it("should return 200 and delete reservation", async () => {
             const res = await request(app)
-                .delete("/reservation/person")
+                .delete("/api/v1/reservation/person")
                 .set("Authorization", `Bearer ${token}`)
                 .send({ id: reservId })
             expect(res.statusCode).toBe(200)

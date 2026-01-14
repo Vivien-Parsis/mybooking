@@ -13,9 +13,9 @@ describe("Person Authentication Integration Tests", () => {
         await databaseConnection.close()
     })
 
-    describe("POST /person/register", () => {
+    describe("POST /api/v1/person/register", () => {
         it("should return 422 if credentials are missing", async () => {
-            const res = await request(app).post("/person/register").send({
+            const res = await request(app).post("/api/v1/person/register").send({
                 email: "",
                 password: "password123",
                 confirmPassword: "password123",
@@ -27,7 +27,7 @@ describe("Person Authentication Integration Tests", () => {
         })
 
         it("should return 422 if password does not match pattern", async () => {
-            const res = await request(app).post("/person/register").send({
+            const res = await request(app).post("/api/v1/person/register").send({
                 email: "test@test.com",
                 password: "pw",
                 confirmPassword: "pw",
@@ -39,7 +39,7 @@ describe("Person Authentication Integration Tests", () => {
         })
 
         it("should return 422 if email format is invalid", async () => {
-            const res = await request(app).post("/person/register").send({
+            const res = await request(app).post("/api/v1/person/register").send({
                 email: "invalid-email-format",
                 password: "password123",
                 confirmPassword: "password123",
@@ -51,7 +51,7 @@ describe("Person Authentication Integration Tests", () => {
         })
         
         it("should return 200 and a token on successful registration", async () => {
-            const res = await request(app).post("/person/register").send({
+            const res = await request(app).post("/api/v1/person/register").send({
                 email: "test@test.com",
                 password: "password123",
                 confirmPassword: "password123",
@@ -63,7 +63,7 @@ describe("Person Authentication Integration Tests", () => {
         })
 
         it("should return 409 if person already exists", async () => {
-            const res = await request(app).post("/person/register").send({
+            const res = await request(app).post("/api/v1/person/register").send({   
                 email: "test@test.com",
                 password: "password123",
                 confirmPassword: "password123",
@@ -75,9 +75,9 @@ describe("Person Authentication Integration Tests", () => {
         })
     })
 
-    describe("POST /person/login", () => {
+    describe("POST /api/v1/person/login", () => {
         it("should return 422 if credentials are missing", async () => {
-            const res = await request(app).post("/person/login").send({
+            const res = await request(app).post("/api/v1/person/login").send({
                 email: "",
                 password: "password123"
             })
@@ -86,7 +86,7 @@ describe("Person Authentication Integration Tests", () => {
         })
 
         it("should return 404 if person not found", async () => {
-            const res = await request(app).post("/person/login").send({
+            const res = await request(app).post("/api/v1/person/login").send({
                 email: "nonexistent@test.com",
                 password: "password123"
             })
@@ -95,7 +95,7 @@ describe("Person Authentication Integration Tests", () => {
         })
 
         it("should return 200 and a token on successful login", async () => {
-            const res = await request(app).post("/person/login").send({
+            const res = await request(app).post("/api/v1/person/login").send({
                 email: "test@test.com",
                 password: "password123"
             })
