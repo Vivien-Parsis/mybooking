@@ -1,7 +1,18 @@
+.loginContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .loginForm {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	background-color: rgb(241, 241, 241);
+	width: fit-content;
+	padding: 20px 40px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-top: 50px;
 }
 .loginForm *{
     margin:10px 0 0;

@@ -63,9 +63,6 @@ const Room = () => {
 							</li>
 							<li>Capacité : {l.room.capacity || "?"}</li>
 						</ul>
-						<button onClick={() => deleteReservation(l._id)}>
-							Supprimer
-						</button>
 					</div>
 				);
 			}

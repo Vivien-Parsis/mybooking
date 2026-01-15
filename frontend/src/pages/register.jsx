@@ -64,57 +64,61 @@ const Register = () => {
 		}
 	};
 	return (
-		<form onSubmit={handleSubmit} className="registerForm">
-			<h2>Se connecter</h2>
-			<label htmlFor="email">email :</label>
-			<input
-				type="email"
-				id="email"
-				name="email"
-				value={formData.email}
-				onChange={handleChange}
-				required
-			/>
-			<label htmlFor="password">mot de passe :</label>
-			<input
-				type="password"
-				id="password"
-				name="password"
-				value={formData.password}
-				onChange={handleChange}
-				required
-			/>
-			<label htmlFor="confirmPassword">confirmer mot de passe :</label>
-			<input
-				type="password"
-				id="confirmPassword"
-				name="confirmPassword"
-				value={formData.confirmPassword}
-				onChange={handleChange}
-				required
-			/>
-			<label htmlFor="firstName">Prénom :</label>
-			<input
-				type="text"
-				id="firstName"
-				name="firstName"
-				value={formData.firstName}
-				onChange={handleChange}
-				required
-			/>
-			<label htmlFor="lastName">Nom :</label>
-			<input
-				type="text"
-				id="lastName"
-				name="lastName"
-				value={formData.lastName}
-				onChange={handleChange}
-				required
-			/>
-			<button type="submit">Se connecter</button>
-			<Link to="/login">Deja inscrit ? se connecter</Link>
-			<span style={{ color: "red" }}>{registerError}</span>
-		</form>
+		<div className="registerContainer">
+			<form onSubmit={handleSubmit} className="registerForm">
+				<h2>Se connecter</h2>
+				<label htmlFor="email">email :</label>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					value={formData.email}
+					onChange={handleChange}
+					required
+				/>
+				<label htmlFor="password">mot de passe :</label>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					value={formData.password}
+					onChange={handleChange}
+					required
+				/>
+				<label htmlFor="confirmPassword">
+					confirmer mot de passe :
+				</label>
+				<input
+					type="password"
+					id="confirmPassword"
+					name="confirmPassword"
+					value={formData.confirmPassword}
+					onChange={handleChange}
+					required
+				/>
+				<label htmlFor="firstName">Prénom :</label>
+				<input
+					type="text"
+					id="firstName"
+					name="firstName"
+					value={formData.firstName}
+					onChange={handleChange}
+					required
+				/>
+				<label htmlFor="lastName">Nom :</label>
+				<input
+					type="text"
+					id="lastName"
+					name="lastName"
+					value={formData.lastName}
+					onChange={handleChange}
+					required
+				/>
+				<button type="submit">Se connecter</button>
+				<Link to="/login">Deja inscrit ? se connecter</Link>
+				<span style={{ color: "red" }}>{registerError}</span>
+			</form>
+		</div>
 	);
 };
 

@@ -39,30 +39,32 @@ const Login = () => {
 			});
 	};
 	return (
-		<form onSubmit={handleSubmit} className="loginForm">
-			<h2>Se connecter</h2>
-			<label htmlFor="email">email :</label>
-			<input
-				type="email"
-				id="email"
-				name="email"
-				value={formData.email}
-				onChange={handleChange}
-				required
-			/>
-			<label htmlFor="password">mot de passe :</label>
-			<input
-				type="password"
-				id="password"
-				name="password"
-				value={formData.password}
-				onChange={handleChange}
-				required
-			/>
-			<button type="submit">Se connecter</button>
-			<Link to="/register">Pas de compte ? S'inscrire</Link>
-			<span style={{ color: "red" }}>{loginError}</span>
-		</form>
+		<div className="loginContainer">
+			<form onSubmit={handleSubmit} className="loginForm">
+				<h2>Se connecter</h2>
+				<label htmlFor="email">email :</label>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					value={formData.email}
+					onChange={handleChange}
+					required
+				/>
+				<label htmlFor="password">mot de passe :</label>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					value={formData.password}
+					onChange={handleChange}
+					required
+				/>
+				<button type="submit">Se connecter</button>
+				<Link to="/register">Pas de compte ? S'inscrire</Link>
+				<span style={{ color: "red" }}>{loginError}</span>
+			</form>
+		</div>
 	);
 };
 

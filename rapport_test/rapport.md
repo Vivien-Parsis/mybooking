@@ -1,13 +1,23 @@
+# **Rapport de test**
 
-# Plan de Test
+## **Test réalisé et techno**
 
-## Tests d'Intégration
+| Type de test | Technologie | Application | Fonctionnalité |
+| :--- | :--- | :--- | :--- |
+| **Integration** | Jest | Backend | Service des utilisateurs et de reservation |
+| **Unitaire** | Jest | Backend | Fonction de generation de JWT et fonction de verification mot de passe et email |
+| **Sécurité** | Cypress | Frontend | Test de la sécurité du frontend et de l'authentification |
+| **Perfomance** | AutoCannon | Frontend + Backend | Test de performance de pages du frontend et backend |
 
-### Module Personne
+## **Plan de Test**
+
+### **Tests d'Intégration**
+
+#### Module Personne
 
 Ce module gère l'inscription et la connexion des utilisateurs.
 
-#### 1. Inscription (POST /person/register)
+##### 1. Inscription (POST /person/register)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu | Statut HTTP |
 | :--- | :--- | :--- | :--- | :--- |
@@ -18,7 +28,7 @@ Ce module gère l'inscription et la connexion des utilisateurs.
 | **P-REG-05** | **Utilisateur déjà existant** | Email déjà utilisé dans la base de données | Message d'erreur "person already exist". | 409 Conflict |
 | **P-REG-06** | **Format email invalide** | Format email invalide (ex: "invalid-email") | Message d'erreur "email not valid". | 422 Unprocessable Entity |
 
-#### 2. Connexion (POST /person/login)
+##### 2. Connexion (POST /person/login)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu | Statut HTTP |
 | :--- | :--- | :--- | :--- | :--- |
@@ -27,11 +37,11 @@ Ce module gère l'inscription et la connexion des utilisateurs.
 | **P-LOG-03** | **Utilisateur inconnu** | Email qui n'existe pas en base | Message d'erreur "person not found". | 404 Not Found |
 | **P-LOG-04** | **Mot de passe incorrect** | Email existant, mais mauvais mot de passe | Message d'erreur "password or email not match". | 401 Unauthorized |
 
-### Module Réservation
+#### Module Réservation
 
 Ce module permet aux utilisateurs authentifiés de gérer leurs réservations.
 
-#### 1. Ajouter une réservation (POST /reservation/person/add)
+##### 1. Ajouter une réservation (POST /reservation/person/add)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu | Statut HTTP |
 | :--- | :--- | :--- | :--- | :--- |
@@ -40,13 +50,13 @@ Ce module permet aux utilisateurs authentifiés de gérer leurs réservations.
 | **R-ADD-03** | **Paramètres manquants** | Manque salle, date, heure ou heure de fin | Message d'erreur "Missing parameters". | 400 Bad Request |
 | **R-ADD-04** | **Non authentifié** | Aucun token ou token invalide | Refus d'accès. | 401/403 (middleware) |
 
-#### 2. Lister les réservations (GET /reservation/person)
+##### 2. Lister les réservations (GET /reservation/person)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu | Statut HTTP |
 | :--- | :--- | :--- | :--- | :--- |
 | **R-LIST-01** | **Liste réussie** | Token valide | Retourne la liste des réservations de l'utilisateur (triée par date ASC). | 200 OK |
 
-#### 3. Supprimer une réservation (DELETE /reservation/person)
+##### 3. Supprimer une réservation (DELETE /reservation/person)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu | Statut HTTP |
 | :--- | :--- | :--- | :--- | :--- |
@@ -55,13 +65,15 @@ Ce module permet aux utilisateurs authentifiés de gérer leurs réservations.
 | **R-DEL-03** | **Non autorisé (Autre utilisateur)** | Token valide A, mais ID de réservation appartenant à l'utilisateur B | Message d'erreur "You are not authorized to delete this reservation". | 401 Unauthorized |
 | **R-DEL-04** | **Réservation introuvable** | ID qui n'existe pas en base | Message d'erreur "Reservation not found". | 404 Not Found |
 
-## Tests Unitaires
+---
 
-### Service Authentification
+### **Tests Unitaires**
+
+#### Service Authentification
 
 Ce module gère la logique métier de l'authentification (génération de token).
 
-#### 1. Génération de Token (generateToken)
+##### 1. Génération de Token (generateToken)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu |
 | :--- | :--- | :--- | :--- |
@@ -69,11 +81,11 @@ Ce module gère la logique métier de l'authentification (génération de token)
 | **A-GEN-02** | **Champs vides** | Objet utilisateur avec champs vides | Retourne `null`. |
 | **A-GEN-03** | **Champs invalides** | Objet utilisateur avec champs invalides | Retourne `null`. |
 
-### Service Vérification
+#### Service Vérification
 
 Ce module gère la validation des données (ex: format de mot de passe).
 
-#### 1. Validation de Mot de Passe (isValidPassword)
+##### 1. Validation de Mot de Passe (isValidPassword)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu |
 | :--- | :--- | :--- | :--- |
@@ -86,7 +98,7 @@ Ce module gère la validation des données (ex: format de mot de passe).
 | **V-PWD-07** | **Trop court** | Moins de 6 caractères | Retourne `false`. |
 | **V-PWD-08** | **Trop long** | Plus de 30 caractères | Retourne `false`. |
 
-#### 2. Validation d'Email (isValidEmail)
+##### 2. Validation d'Email (isValidEmail)
 
 | ID | Cas de Test | Données d'entrée | Résultat Attendu |
 | :--- | :--- | :--- | :--- |
@@ -98,9 +110,11 @@ Ce module gère la validation des données (ex: format de mot de passe).
 | **V-EML-06** | **Email sans extension** | Email sans extension de domaine (ex: "test@test") | Retourne `false`. |
 | **V-EML-07** | **Email avec espaces** | Email contenant des espaces (ex: "test @test.com") | Retourne `false`. |
 
-## Tests Frontend (Cypress)
+---
 
-### Sécurité et Authentification
+### **Tests Frontend (Cypress)**
+
+#### Sécurité et Authentification
 
 Ce module vérifie la sécurité de l'interface utilisateur et la protection contre les vulnérabilités courantes.
 
@@ -116,11 +130,13 @@ Ce module vérifie la sécurité de l'interface utilisateur et la protection con
 | **F-SEC-08** | **Validation MDP non identiques** | Mot de passe et confirmation différents | Message "mot de passes non identiques". |
 | **F-SEC-09** | **Validation Format MDP** | Mot de passe trop court ou non conforme | Message "mot de passes non conforme". |
 
-## Tests de Performance
+---
+
+### **Tests de Performance**
 
 Ces tests mesurent les performances de l'application sous charge à l'aide d'**autocannon**. Chaque test utilise **10 connexions simultanées** et un **pipelining de 1**.
 
-### Backend API
+#### Backend
 
 Ce module teste les performances des endpoints de l'API backend.
 
@@ -131,7 +147,7 @@ Ce module teste les performances des endpoints de l'API backend.
 | **PERF-BE-03** | **Erreur 404** | `GET /nonexistent-endpoint` | 10s | 10 connexions | Mesure des performances de gestion des erreurs 404. |
 | **PERF-BE-04** | **Liste Réservations (Authentifié)** | `GET /reservation/person` | 2s | 10 connexions + Token JWT | Mesure des performances de récupération des réservations utilisateur. |
 
-### Frontend
+#### Frontend
 
 Ce module teste les performances des pages frontend.
 
