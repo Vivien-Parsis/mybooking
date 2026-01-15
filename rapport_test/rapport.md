@@ -1,6 +1,14 @@
 # **Rapport de test**
 
-## **Test réalisé et techno**
+## **Technologie utilisé**
+
+| Service | Technologie |
+| :--- | :--- |
+| **Backend** | NodeJs, ExpressJs |
+| **Frontend** | ReactJs |
+| **Base de donnée** | MongoDB |
+
+## **Test réalisé et technologie**
 
 | Type de test | Technologie | Application | Fonctionnalité |
 | :--- | :--- | :--- | :--- |
