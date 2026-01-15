@@ -17,6 +17,15 @@
 | **Sécurité** | Cypress | Frontend | Test de la sécurité du frontend et de l'authentification |
 | **Perfomance** | AutoCannon | Frontend + Backend | Test de performance de pages du frontend et backend |
 
+## **Procédure pour executer les test**
+
+| Type de test | dossier | procédure |
+| :--- | :--- | :--- |
+| **Integration** | /backend | -> Executer la command "npm run test" |
+| **Unitaire** | /backend | -> Executer la command "npm run test" |
+| **Sécurité** | /frontend | -> Lancer le serveur frontend avec "npm run dev" -> Sur un autre terminal executer la command "npm run test" |
+| **Performance** | /perfomance_test | -> Lancer le serveur frontend et backend -> Sur un autre terminal executer la command "npm run test" |
+
 ## **Plan de Test**
 
 ### **Tests d'Intégration**
