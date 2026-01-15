@@ -85,7 +85,7 @@ const Room = () => {
 		if (!rooms) return null;
 
 		return rooms.map((r) => (
-			<div key={r._id} className="room-card">
+			<div key={r._id} className="roomCard">
 				<ul>
 					<li>Nom : {r.name || "?"}</li>
 					<li>Batiment : {r.building || "?"}</li>

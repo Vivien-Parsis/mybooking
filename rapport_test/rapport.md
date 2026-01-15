@@ -174,3 +174,23 @@ Ce module teste les performances des pages frontend.
 | **PERF-FE-02** | **Page Accueil (Authentifié)** | `/` | 2s | 10 connexions + Token JWT | Mesure du temps de chargement de la page d'accueil pour utilisateur connecté. |
 | **PERF-FE-03** | **Page Réservations (Authentifié)** | `/person/reservation` | 2s | 10 connexions + Token JWT | Mesure du temps de chargement de la page des réservations. |
 | **PERF-FE-04** | **Erreur 404** | `/nonexistent-page` | 10s | 10 connexions | Mesure des performances de la page d'erreur 404. |
+
+## **Resultat**
+
+### Test d'intégration et unitaire
+
+![resultat integration et unitaire](./resultat/integration_unitaire.png)
+
+### Test securité
+
+![resultat integration](./resultat/security.png)
+
+### Test performance
+
+#### Performance backend
+
+![resultat performance backend](./resultat/performance_backend.png)
+
+#### Performance frontend
+
+![resultat performance frontend](./resultat/performance_frontend.png)

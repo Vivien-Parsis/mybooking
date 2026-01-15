@@ -1,5 +1,5 @@
 import { getRoomCheck, healthCheck, backendError404Check, getReservationCheck } from "./test/backend.test.js"
-import { loginCheck, homePageAsLoggedCheck, frontendError404Check } from "./test/frontend.test.js"
+import { loginCheck, homePageAsLoggedCheck, frontendError404Check, reservationPageAsLoggedCheck } from "./test/frontend.test.js"
 
 
 console.log("\n######Backend Api Health Check######\n")
@@ -21,4 +21,7 @@ healthCheck().then(() => {
 }).then(() => {
     console.log("\n######Frontend Page 404 Error Check######\n")
     return frontendError404Check()
+}).then(() => {
+    console.log("\n######Frontend Page Reservation As Logged Check######\n")
+    return reservationPageAsLoggedCheck()
 })

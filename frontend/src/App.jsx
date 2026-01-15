@@ -7,6 +7,7 @@ import Header from "./components/header";
 import Room from "./pages/room";
 import PersonReservation from "./pages/personReservation";
 import Error404 from "./pages/error404";
+import Footer from "./components/footer";
 
 function App() {
 	return (
@@ -54,6 +55,7 @@ function App() {
 					}
 				/>
 			</Routes>
+			<Footer/>
 		</>
 	);
 }
